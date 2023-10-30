@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom';
 import logo from '../../../public/assets/icons/logo.svg'
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const Navbar = () => {
+    const {user, logOut} = useContext(AuthContext);
+
+    const handleLogOut = ()=>{
+        logOut()
+        .then()
+        .then()
+    }
     return (
         <div className="flex justify-between p-16 ">
             <div>
@@ -12,8 +21,17 @@ const Navbar = () => {
                     <Link to='/'>Home</Link>
                     <Link to='about'>About</Link>
                     <Link>Services</Link>
-                    <Link>Blog</Link>
-                    <Link>Contact</Link>                   
+                    <Link>Blog</Link>                                   
+                      
+                    {
+                        user?.email?
+                       <>
+                        <Link to='/bookings'>My Bookings</Link>
+                        <Link onClick={handleLogOut}>Logout</Link>  
+                       </>
+                         : <Link to='/login'>Login</Link>
+                    }    
+
                 </ul>
             </div>
 

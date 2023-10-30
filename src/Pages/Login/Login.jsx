@@ -1,6 +1,7 @@
 
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import axios from "axios";
 
 const Login = () => {
     const { signinUser } = useContext(AuthContext);
@@ -10,14 +11,22 @@ const Login = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(email, password);
+        // console.log(email, password);
+
 
         // user SignIn firebase 
         signinUser(email, password)
-        .then(res => res.json())
-        .then(data=> {
-            console.log(data);
+        .then(result =>{
+            const loggedInUser = result.user;
+            console.log(loggedInUser);
+            const user = {email}
+            // Using Axios for post Request 
+            axios.post('http://localhost:5000/jwt', user, {withCredentials:true})
+            .then(res =>{
+                console.log(res.data);
+            })
         })
+        .then()
        
 
     }

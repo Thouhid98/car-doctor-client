@@ -17,7 +17,7 @@ const Checkout = () => {
         const message = e.target.message.value; 
 
         const booking ={
-            customerName: name, message:message, img, service: title,
+            customerName: name, message:message, image:img, service: title,
             email, date, service_id:_id, price:price
         }
         console.log(booking);
